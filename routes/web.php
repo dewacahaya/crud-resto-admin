@@ -17,15 +17,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Memaksa link localhost utama berpindah ke halaman login
 Route::get('/', [LoginController::class, 'index']);
 
+// Route "localhost/dashboard/ yang dapat diakses oleh admin setelah login
 Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');
 
+
+// Route "localhost/login" yang dapat diakses oleh admin sebelum login atau saat sedang login
 Route::get('login', [LoginController::class, 'index'])->name('login');
 Route::post('login-proses', [LoginController::class, 'login_proses'])->name('login.proses');
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
 
+
+// Route yang hanya dapat diakses oleh admin
 Route::middleware('auth')->group(function () {
     Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');
     Route::get('/admin/profile', [AdminController::class, 'editProfile'])->name('admin.profile');
@@ -33,6 +39,8 @@ Route::middleware('auth')->group(function () {
 });
 
 
+
+// Route yang dapat diakses oleh admin setelah login
 Route::get('menus', [MenusController::class, 'index'])->name('menus.index');
 Route::get('menus/create', [MenusController::class, 'create'])->name('menus.create');
 Route::post('menus/store', [MenusController::class, 'store'])->name('menus.store');
