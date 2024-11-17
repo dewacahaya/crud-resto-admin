@@ -31,11 +31,23 @@ class MenusController extends Controller
      */
     public function store(Request $request)
     {
-        Menu::create([
-            "kode" => $request->kode,
-            "name" => $request->name,
-            "harga" => $request->harga,
+        $validatedData = $request->validate([
+            "kode" => "required|string|max:255",
+            "name" => "required|string|max:255",
+            "harga" => "required|numeric",
+            "gambar" => "nullable|image|mimes:jpg,jpeg,png|max:2048", // Validasi untuk gambar
         ]);
+
+
+        if ($request->hasFile('gambar')) {
+            $filePath = $request->file('gambar')->store('gambar', 'public');
+            $validatedData['gambar'] = $filePath; // Path file ditambahkan ke array validatedData
+        }
+
+        // Simpan data ke database
+        Menu::create($validatedData);
+
+        // Redirect ke halaman index dengan pesan sukses
         return redirect()->route("menus.index")->with('created', 'Data berhasil ditambahkan!');
     }
 

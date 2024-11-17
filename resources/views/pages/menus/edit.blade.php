@@ -23,6 +23,17 @@
                         <input type="number" name="harga" id="harga" step="0.01" min="0.01"
                             value="{{ old('harga', $menus->harga) }}" class="form-control"
                             placeholder="Masukkan Harga menu">
+
+                        <label for="gambar">Gambar</label>
+                        <input type="file" name="gambar" id="gambar" class="form-control">
+
+                        @if ($menus->gambar)
+                            <div class="mt-2">
+                                <label>Gambar Saat Ini : </label>
+                                <img src="{{ Storage::url($menus->gambar) }}" alt="{{ $menus->name }}"
+                                    style="max-width: 150px; margin-left: 20px">
+                            </div>
+                        @endif
                     </div>
                     </hr>
                     <div class=" pt-3">

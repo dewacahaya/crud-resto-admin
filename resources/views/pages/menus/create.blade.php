@@ -8,7 +8,7 @@
                     <h1>Tambah Data Menu</h1>
                 </div>
 
-                <form action="{{ route('menus.store') }}" method="POST">
+                <form action="{{ route('menus.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <hr>
                     <div class="form-group">
@@ -21,6 +21,8 @@
                         <label for="harga">Harga</label>
                         <input type="number" name="harga" id="harga" class="form-control mb-2"
                             placeholder="Masukkan Harga Menu">
+                        <label for="gambar">Tambah Gambar : </label>
+                        <input type="file" name="gambar" id="gambar" accept="image/*">
                     </div>
                     </hr>
                     <div class=" pt-3">

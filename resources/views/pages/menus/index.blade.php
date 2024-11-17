@@ -20,10 +20,10 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-between py-3">
-                    <h1 class="">Halaman Data Barang</h1>
+                    <h1 class="">Halaman Data Menu</h1>
 
                     <div>
-                        <a href="{{ route('menus.create') }}" class="btn btn-primary">Tambah Barang</a>
+                        <a href="{{ route('menus.create') }}" class="btn btn-primary">Tambah Menu</a>
                     </div>
                 </div>
                 <table class="table table-bordered table-striped mt-1">
@@ -33,6 +33,7 @@
                             <th>Kode</th>
                             <th>Nama</th>
                             <th>Harga</th>
+                            <th>Gambar</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -43,6 +44,17 @@
                                 <td>{{ $d->kode }}</td>
                                 <td>{{ $d->name }}</td>
                                 <td>{{ $d->harga }}</td>
+                                <td class="text-center">
+                                    @if ($d->gambar)
+                                        <a href="{{ Storage::url($d->gambar) }}" target="_blank">
+                                            <img class="img-fluid" src="{{ Storage::url($d->gambar) }}"
+                                                alt="{{ $d->name }}" style="max-width: 100px;">
+                                        </a>
+                                    @else
+                                        <span class="text-muted">Tidak ada gambar</span>
+                                    @endif
+                                </td>
+
                                 <td class="text-center">
                                     <a href="{{ route('menus.edit', $d->id) }}" class="btn btn-sm btn-warning">Edit</a>
                                     <a href="{{ route('menus.show', $d->id) }}" class="btn btn-sm btn-info">Detail</a>
@@ -58,7 +70,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="5" class="text-center">Data tidak ditemukan</td>
+                                <td colspan="6" class="text-center">Data tidak ditemukan</td>
                             </tr>
                         @endforelse
                     </tbody>
