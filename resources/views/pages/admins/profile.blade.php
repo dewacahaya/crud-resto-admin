@@ -7,7 +7,8 @@
             <div class="col-md-12 mb-3">
                 <div class="card mb-4 shadow">
                     <div class="card-body">
-                        <form action="{{ route('admin.profile.update', ['admin_id' => $admin->id]) }}" method="POST">
+                        <form id="admin-profile-form" action="{{ route('admin.profile.update', ['admin_id' => $admin->id]) }}"
+                            method="POST">
                             @csrf
                             <div class="mb-3">
                                 <label for="name" class="form-label">Nama</label>
@@ -44,7 +45,7 @@
                                     class="form-control">
                             </div>
 
-                            <button type="submit" class="btn btn-primary">Simpan</button>
+                            <button type="button" id="save-button" class="btn btn-primary">Simpan</button>
                         </form>
                     </div>
                 </div>
@@ -52,4 +53,23 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.getElementById('save-button').addEventListener('click', function() {
+            Swal.fire({
+                title: 'Konfirmasi Penyimpanan',
+                text: "Apakah Anda yakin ingin menyimpan perubahan?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, simpan!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('admin-profile-form').submit();
+                }
+            });
+        });
+    </script>
 @endsection
