@@ -8,7 +8,7 @@
                     <h1>Edit Data Menu</h1>
                 </div>
 
-                <form action="{{ route('menus.update', $menus->id) }}" method="POST">
+                <form action="{{ route('menus.update', $menus->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <hr>

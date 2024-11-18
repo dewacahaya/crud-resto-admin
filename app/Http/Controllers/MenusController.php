@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Menu;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class MenusController extends Controller
 {
@@ -76,14 +77,39 @@ class MenusController extends Controller
      */
     public function update(Request $request, $menus_id)
     {
-        Menu::where('id', $menus_id)->update([
-            'kode' => $request->kode,
-            'name' => $request->name,
-            'harga' => $request->harga,
+        $validatedData = $request->validate([
+            "kode" => "required|string|max:255",
+            "name" => "required|string|max:255",
+            "harga" => "required|numeric",
+            "gambar" => "nullable|image|mimes:jpg,jpeg,png|max:2048", // Validasi untuk gambar
         ]);
 
-        return redirect()->route('menus.index')->with('updated', 'Data Berhasil Diubah!');
+        $menus = Menu::findOrFail($menus_id);
+
+        // Jika ada file gambar baru diunggah
+        if ($request->hasFile('gambar')) {
+            // Hapus gambar lama jika ada
+            if ($menus->gambar && Storage::exists('public/' . $menus->gambar)) {
+                Storage::delete('public/' . $menus->gambar);
+            }
+
+            $filePath = $request->file('gambar')->store('gambar', 'public');
+
+            // Simpan gambar baru
+            $filePath = $request->file('gambar')->store('gambar', 'public');
+            $validatedData['gambar'] = $filePath;
+        } else {
+            // Jika tidak ada gambar baru, tetap gunakan gambar lama
+            $validatedData['gambar'] = $menus->gambar;
+        }
+
+        // Update data menus
+        $menus->update($validatedData);
+
+        return redirect()->route('menus.index')->with('updated', 'Data berhasil diubah!');
     }
+
+
 
     /**
      * Remove the specified resource from storage.

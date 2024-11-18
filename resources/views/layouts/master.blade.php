@@ -13,7 +13,7 @@
         /* Custom Styling */
         .sidebar {
             width: 250px;
-            height: 90vh;
+            height: auto;
             top: 0;
             left: 0;
             overflow-y: auto;
