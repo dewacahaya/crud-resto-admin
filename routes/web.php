@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MenusController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PelangganController;
 use Illuminate\Support\Facades\Route;
 
@@ -53,3 +54,15 @@ Route::delete('menus/destroy/{menus_id}', [MenusController::class, 'destroy'])->
 
 // Route Khusus pelanggan
 Route::get('index-pelanggan', [PelangganController::class, 'index'])->name('pelanggan.index');
+Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
+
+Route::get(
+    '/',
+    function () {
+        return view('pages.pelanggan.home');
+    }
+);
+Route::get(
+    '/contact',
+    [HomeController::class, 'contact']
+)->name('home.contact');

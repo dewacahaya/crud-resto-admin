@@ -16,4 +16,10 @@ class HomeController extends Controller
         // Mengirim data ke view
         return view('pages.dashboard', compact('admin'));
     }
+    public function contact()
+    {
+
+        // Mengirim data ke view
+        return view('pages.pelanggan.contact');
+    }
 }
