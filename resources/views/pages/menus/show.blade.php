@@ -25,6 +25,12 @@
                             <th>:</th>
                             <th>{{ $menus->harga }}</th>
                         </tr>
+                        <tr>
+                            <th>Harga </th>
+                            <th>:</th>
+                            <th><img src="{{ Storage::url($menus->gambar) }}" alt="" class="img-fluid"
+                                    style="max-width: 150px; margin-left: 20px"></th>
+                        </tr>
 
                     </tbody>
                 </table>
