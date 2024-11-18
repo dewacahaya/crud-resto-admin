@@ -14,6 +14,7 @@
         .sidebar {
             width: 250px;
             height: auto;
+            min-height: 90vh;
             top: 0;
             left: 0;
             overflow-y: auto;

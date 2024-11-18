@@ -2,7 +2,7 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="container-fluid h-100">
+    <div class="container-fluid">
         <h1 class="mb-4">Dashboard</h1>
         <div class="row">
             <div class="col-md-6 mb-3">
