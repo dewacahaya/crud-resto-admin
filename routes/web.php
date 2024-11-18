@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MenusController;
+use App\Http\Controllers\PelangganController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Memaksa link localhost utama berpindah ke halaman login
-Route::get('/', [LoginController::class, 'index']);
+Route::get('/', [PelangganController::class, 'index']);
 
 // Route "localhost/dashboard/ yang dapat diakses oleh admin setelah login
 Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');
@@ -48,3 +49,7 @@ Route::get('menus/edit/{menus_id}', [MenusController::class, 'edit'])->name('men
 Route::put('menus/update/{menus_id}', [MenusController::class, 'update'])->name('menus.update');
 Route::get('menus/show/{menus_id}', [MenusController::class, 'show'])->name('menus.show');
 Route::delete('menus/destroy/{menus_id}', [MenusController::class, 'destroy'])->name('menus.destroy');
+
+
+// Route Khusus pelanggan
+Route::get('index-pelanggan', [PelangganController::class, 'index'])->name('pelanggan.index');
